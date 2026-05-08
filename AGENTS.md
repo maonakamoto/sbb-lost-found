@@ -118,6 +118,54 @@ Option B: Run reporting service only
 - Dev: `npm run dev --workspace=@sbb-lost-found/reporting-service`
 - Health: `GET /health`, Docs: `GET /docs`
 
+## Design System
+
+**SSOT situation**: Token values live in `frontend/tailwind.config.js` as literal hex. A TypeScript mirror exists at `frontend/lib/design-system.ts` — these two files must stay in sync (a known drift already exists: `SBB_SHADOWS.modal` differs between them).
+
+### Color Tokens (use `sbb-*` Tailwind classes in components)
+
+```
+sbb-red / sbb-red-125 / sbb-red-150   — primary brand, hover, active
+sbb-charcoal                           — primary text (#212121)
+sbb-granite                            — secondary text (#686868)
+sbb-smoke                              — placeholder (#8D8D8D)
+sbb-cloud                              — borders (#E5E5E5)
+sbb-milk                               — page background (#F6F6F6)
+sbb-white                              — card/surface background (#FFFFFF)
+sbb-success / sbb-warning / sbb-error  — functional states
+sbb-blue / sbb-info                    — info state (#2D327D)
+```
+
+### Spacing / Radius / Shadow classes
+
+```
+Spacing:       p-sbb-xs (4px) / p-sbb-sm (8px) / p-sbb-md (16px) / p-sbb-lg (24px) / p-sbb-xl (32px) / p-sbb-2xl (48px)
+Border radius: rounded-sbb-sm (4px) / rounded-sbb-md (8px) / rounded-sbb-lg (16px) / rounded-sbb-xl (24px)
+Shadows:       shadow-sbb-card / shadow-sbb-modal / shadow-sbb-button
+```
+
+### Utility classes defined in `frontend/app/globals.css`
+
+Pre-built SBB component classes (use these, do not rebuild inline):
+- `.btn-sbb-primary` / `.btn-sbb-secondary` / `.btn-sbb-ghost`
+- `.card-sbb` / `.input-sbb` / `.header-sbb`
+- `.mobile-container` / `.safe-top` / `.safe-bottom` / `.bottom-nav`
+- `.modal-overlay` / `.modal-content` / `.toast`
+- `.touch-feedback` / `.hide-scrollbar`
+- `.animate-slide-up` / `.animate-slide-down` / `.animate-fade-in` / `.animate-pulse-ring` / `.animate-pulse-subtle`
+
+### SSOT Rule
+
+All design tokens live in `app/globals.css` only. Tailwind config MUST reference CSS vars (`'var(--name)'`), never literal values. Components MUST use semantic Tailwind classes, never arbitrary values like `bg-[#hex]`.
+
+**Violations to fix when touching UI:**
+- `bg-[#hex]` / `text-[#hex]` in className → CSS var + semantic class
+- `style={{ color: '#hex' }}` → CSS var + className
+- Literal hex in tailwind.config → `'var(--color-name)'`
+- Same token defined in 2+ files → consolidate to globals.css
+
+**Audit:** `grep -r '\[#' frontend/` — every result is a violation.
+
 ## Coding Standards
 - TypeScript strict; Node ESM/CJS as per tsconfig per service
 - Linting with ESLint where configured; formatting via Prettier if present

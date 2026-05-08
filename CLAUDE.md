@@ -91,31 +91,69 @@ npm run lint         # Lint code
 
 ---
 
-## Design System (SSOT)
+## Design System
 
-**Source of Truth**: `frontend/tailwind.config.js`
+**SSOT**: All design tokens are CSS custom properties in `frontend/app/globals.css`. `tailwind.config.js` references CSS vars (no literal values). `design-system.ts` mirrors select values for non-CSS runtime contexts only (canvas, Satori OG images).
 
-### SBB Colors (Official)
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Red | #EB0000 | Primary actions, brand |
-| Red-125 | #C60018 | Hover states |
-| Red-150 | #A20013 | Active states |
-| Charcoal | #212121 | Primary text |
-| Granite | #686868 | Secondary text |
-| Cloud | #E5E5E5 | Borders |
-| Milk | #F6F6F6 | Background |
-| Success | #00973B | Positive states |
-| Warning | #FFAB00 | Warning states |
+### Token SSOT: `frontend/app/globals.css`
 
-### Spacing (4px Grid)
-- xs: 4px, sm: 8px, md: 16px, lg: 24px, xl: 32px
+All tokens are CSS custom properties. `tailwind.config.js` maps Tailwind utilities → CSS vars (no literal values).
 
-### Typography
-- Font: SBB Web (falls back to system fonts)
-- Scale: 12px → 32px
+**Colors (official SBB palette from digital.sbb.ch):**
+```css
+--sbb-red: #EB0000        /* primary, brand, focus ring */
+--sbb-red-125: #C60018    /* hover */
+--sbb-red-150: #A20013    /* active */
+--sbb-white: #FFFFFF
+--sbb-milk: #F6F6F6       /* page background */
+--sbb-cloud: #E5E5E5      /* borders */
+--sbb-silver: #DCDCDC
+--sbb-aluminum: #D2D2D2
+--sbb-platinum: #CDCDCD
+--sbb-cement: #BDBDBD     /* active secondary bg */
+--sbb-graphite: #B7B7B7
+--sbb-storm: #A8A8A8
+--sbb-smoke: #8D8D8D      /* placeholder text */
+--sbb-metal: #767676
+--sbb-granite: #686868    /* secondary text */
+--sbb-anthracite: #5A5A5A
+--sbb-iron: #444444
+--sbb-charcoal: #212121   /* primary text */
+--sbb-midnight: #151515
+--sbb-black: #000000
+--sbb-blue: #2D327D       /* info state */
+--sbb-success: #00973B
+--sbb-warning: #FFAB00
+--sbb-error: #EB0000      /* = red */
+--sbb-info: #2D327D       /* = blue */
+```
 
-**Important**: Do NOT define colors in multiple places. Import from Tailwind classes.
+**Spacing, radius, shadows:**
+```css
+--sbb-space-xs/sm/md/lg/xl/2xl:  4/8/16/24/32/48px
+--sbb-radius-sm/md/lg/xl:        4/8/16/24px
+--sbb-shadow-card:   0 2px 8px rgba(0,0,0,0.08)
+--sbb-shadow-modal:  0 4px 24px rgba(0,0,0,0.16)
+--sbb-shadow-button: 0 2px 4px rgba(235,0,0,0.24)   /* red-tinted */
+```
+
+**Typography** (literal values in tailwind.config.js — no CSS var approach for font-size arrays):
+```
+sbb-xs→12/16  sbb-sm→14/20  sbb-base→16/24  sbb-lg→18/28
+sbb-xl→20/28  sbb-2xl→24/32  sbb-3xl→32/40
+```
+
+**Font:** `SBB Web, -apple-system, BlinkMacSystemFont, ...` (system font stack)
+
+### TypeScript Mirror — `frontend/lib/design-system.ts`
+
+Use ONLY in non-CSS runtime contexts (canvas drawing, Satori OG images, Recharts SVG attributes) where CSS vars are inaccessible. Do NOT use in React components — use Tailwind `sbb-*` classes instead. Must stay in sync with `globals.css` manually.
+
+### SSOT Rule
+
+All design tokens live in `frontend/app/globals.css` only. `tailwind.config.js` references CSS vars. Components use `sbb-*` Tailwind classes, never `bg-[#hex]` or inline styles.
+
+**Audit:** `grep -r '\[#' frontend/` — every result is a violation.
 
 ---
 

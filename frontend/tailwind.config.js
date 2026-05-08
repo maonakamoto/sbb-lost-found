@@ -7,41 +7,34 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Official SBB Design System Colors from digital.sbb.ch
+      // SBB colors — values defined as CSS vars in app/globals.css
       colors: {
         sbb: {
-          // Red palette
-          red: '#EB0000',
-          'red-125': '#C60018',
-          'red-150': '#A20013',
-
-          // Neutrals (official SBB naming)
-          white: '#FFFFFF',
-          milk: '#F6F6F6',
-          cloud: '#E5E5E5',
-          silver: '#DCDCDC',
-          aluminum: '#D2D2D2',
-          platinum: '#CDCDCD',
-          cement: '#BDBDBD',
-          graphite: '#B7B7B7',
-          storm: '#A8A8A8',
-          smoke: '#8D8D8D',
-          metal: '#767676',
-          granite: '#686868',
-          anthracite: '#5A5A5A',
-          iron: '#444444',
-          charcoal: '#212121',
-          midnight: '#151515',
-          black: '#000000',
-
-          // Blue
-          blue: '#2D327D',
-
-          // Functional colors (derived from SBB patterns)
-          success: '#00973B',
-          warning: '#FFAB00',
-          error: '#EB0000',
-          info: '#2D327D',
+          red:        'var(--sbb-red)',
+          'red-125':  'var(--sbb-red-125)',
+          'red-150':  'var(--sbb-red-150)',
+          white:      'var(--sbb-white)',
+          milk:       'var(--sbb-milk)',
+          cloud:      'var(--sbb-cloud)',
+          silver:     'var(--sbb-silver)',
+          aluminum:   'var(--sbb-aluminum)',
+          platinum:   'var(--sbb-platinum)',
+          cement:     'var(--sbb-cement)',
+          graphite:   'var(--sbb-graphite)',
+          storm:      'var(--sbb-storm)',
+          smoke:      'var(--sbb-smoke)',
+          metal:      'var(--sbb-metal)',
+          granite:    'var(--sbb-granite)',
+          anthracite: 'var(--sbb-anthracite)',
+          iron:       'var(--sbb-iron)',
+          charcoal:   'var(--sbb-charcoal)',
+          midnight:   'var(--sbb-midnight)',
+          black:      'var(--sbb-black)',
+          blue:       'var(--sbb-blue)',
+          success:    'var(--sbb-success)',
+          warning:    'var(--sbb-warning)',
+          error:      'var(--sbb-error)',
+          info:       'var(--sbb-info)',
         }
       },
       fontFamily: {
@@ -57,25 +50,25 @@ module.exports = {
           'sans-serif',
         ],
       },
-      // SBB spacing system (4px base)
+      // Spacing, radius, shadows — values defined as CSS vars in app/globals.css
       spacing: {
-        'sbb-xs': '4px',
-        'sbb-sm': '8px',
-        'sbb-md': '16px',
-        'sbb-lg': '24px',
-        'sbb-xl': '32px',
-        'sbb-2xl': '48px',
+        'sbb-xs':  'var(--sbb-space-xs)',
+        'sbb-sm':  'var(--sbb-space-sm)',
+        'sbb-md':  'var(--sbb-space-md)',
+        'sbb-lg':  'var(--sbb-space-lg)',
+        'sbb-xl':  'var(--sbb-space-xl)',
+        'sbb-2xl': 'var(--sbb-space-2xl)',
       },
       borderRadius: {
-        'sbb-sm': '4px',
-        'sbb-md': '8px',
-        'sbb-lg': '16px',
-        'sbb-xl': '24px',
+        'sbb-sm': 'var(--sbb-radius-sm)',
+        'sbb-md': 'var(--sbb-radius-md)',
+        'sbb-lg': 'var(--sbb-radius-lg)',
+        'sbb-xl': 'var(--sbb-radius-xl)',
       },
       boxShadow: {
-        'sbb-card': '0 2px 8px rgba(0, 0, 0, 0.08)',
-        'sbb-modal': '0 4px 24px rgba(0, 0, 0, 0.16)',
-        'sbb-button': '0 2px 4px rgba(235, 0, 0, 0.24)',
+        'sbb-card':   'var(--sbb-shadow-card)',
+        'sbb-modal':  'var(--sbb-shadow-modal)',
+        'sbb-button': 'var(--sbb-shadow-button)',
       },
       fontSize: {
         // SBB typography scale

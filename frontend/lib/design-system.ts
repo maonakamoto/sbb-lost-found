@@ -1,10 +1,13 @@
 /**
- * SBB Design System - Single Source of Truth
+ * SBB Design System — JS constants for non-CSS contexts only.
  *
- * All design tokens are defined HERE and derived elsewhere.
+ * SSOT is app/globals.css (CSS custom properties).
+ * Use this file ONLY where CSS vars are inaccessible at runtime:
+ * canvas drawing, Satori OG images, charting libraries (Recharts SVG attrs).
+ * Do NOT use in React components — use Tailwind sbb-* classes instead.
+ *
+ * Values must stay in sync with globals.css manually.
  * Based on official SBB digital design system: https://digital.sbb.ch
- *
- * DO NOT define colors, spacing, or typography elsewhere.
  */
 
 // ============================================================================
@@ -78,7 +81,7 @@ export const SBB_TYPOGRAPHY = {
   lg: ['18px', { lineHeight: '28px' }],
   xl: ['20px', { lineHeight: '28px' }],
   '2xl': ['24px', { lineHeight: '32px' }],
-  '3xl': ['30px', { lineHeight: '36px' }],
+  '3xl': ['32px', { lineHeight: '40px' }],
 } as const;
 
 // ============================================================================
@@ -86,9 +89,9 @@ export const SBB_TYPOGRAPHY = {
 // ============================================================================
 
 export const SBB_SHADOWS = {
-  card: '0 2px 8px rgba(0, 0, 0, 0.08)',
-  modal: '0 4px 24px rgba(0, 0, 0, 0.15)',
-  button: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  card:   '0 2px 8px rgba(0, 0, 0, 0.08)',
+  modal:  '0 4px 24px rgba(0, 0, 0, 0.16)',
+  button: '0 2px 4px rgba(235, 0, 0, 0.24)',
 } as const;
 
 // ============================================================================
