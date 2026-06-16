@@ -104,7 +104,7 @@ Official SBB corporate identity -- not approximated, implemented from their desi
 | Auth | JWT, bcrypt |
 | Validation | Zod (runtime), TypeScript (compile-time) |
 | API Docs | OpenAPI 3.0 (auto-generated at `/docs`) |
-| Deployment | Docker, Kubernetes manifests, Vercel (frontend) |
+| Deployment | Docker, Kubernetes manifests, self-hosted (Hetzner + Caddy) |
 
 ---
 
@@ -119,7 +119,7 @@ Official SBB corporate identity -- not approximated, implemented from their desi
 ### Setup
 
 ```bash
-git clone https://github.com/g-but/sbb-lost-found.git
+git clone https://github.com/maonakamoto/sbb-lost-found.git
 cd sbb-lost-found
 
 # Option A: Docker (recommended)
